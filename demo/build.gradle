@@ -1,0 +1,57 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'com.google.cloud.tools.jib' version '1.0.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://repository.aspose.com/repo/"
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	implementation 'com.google.code:sitemapgen4j:1.0.1'
+	implementation 'org.awaitility:awaitility:3.0.0'
+	implementation "org.springframework.boot:spring-boot-starter-webflux"
+
+	// valid
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	//한글 파일 변환
+	implementation 'org.jsoup:jsoup:1.14.2'
+	implementation 'kr.dogfoot:hwplib:1.0.3'
+
+	//implementation group: 'com.aspose', name: 'aspose-imaging', version: '20.8', classifier: 'jdk17'
+	implementation(
+			group: 'com.aspose',
+			name: 'aspose-words',
+			version: '21.5',
+			classifier: 'jdk17')
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
